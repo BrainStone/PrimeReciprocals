@@ -36,12 +36,12 @@ template <std::unsigned_integral T>
 class PrimeIterator {
 private:
 	PrimeGenerator<T>* generator;
-	std::list<T>::const_iterator current_prime;
+	typename std::list<T>::const_iterator current_prime;
 
 	PrimeIterator(PrimeGenerator<T>* generator);
 
 public:
-	using difference_type = std::list<T>::const_iterator::difference_type;
+	using difference_type = typename std::list<T>::const_iterator::difference_type;
 	using value_type = T;
 
 	PrimeIterator() = default;

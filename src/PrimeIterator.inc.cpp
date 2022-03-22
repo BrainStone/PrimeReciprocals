@@ -10,7 +10,7 @@ template <std::unsigned_integral T>
 PrimeGenerator<T>::PrimeGenerator() : found_primes({2, 3, 5, 7}), last_checked_number(5) {}
 
 template <std::unsigned_integral T>
-PrimeGenerator<T>::iterator PrimeGenerator<T>::begin() {
+typename PrimeGenerator<T>::iterator PrimeGenerator<T>::begin() {
 	return PrimeIterator<T>(this);
 }
 

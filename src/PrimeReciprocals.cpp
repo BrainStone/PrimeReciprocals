@@ -20,7 +20,7 @@ int main() {
 	PrimeGenerator<std::uint64_t> gen;
 	std::bidirectional_iterator auto test = gen.begin();
 
-	for (PrimeGenerator<std::uint64_t>::iterator it = gen.begin(); ; ++it) {
+	for (typename PrimeGenerator<std::uint64_t>::iterator it = gen.begin(); ; ++it) {
 		std::cout << *it << '\n';
 	}
 }
