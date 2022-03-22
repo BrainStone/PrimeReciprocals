@@ -7,7 +7,7 @@
 
 // PrimeGenerator
 template <std::unsigned_integral T>
-PrimeGenerator<T>::PrimeGenerator() : found_primes({2, 3, 5, 7}), last_checked_number(5) {}
+PrimeGenerator<T>::PrimeGenerator() : found_primes({2, 3}), number_to_check(5) {}
 
 template <std::unsigned_integral T>
 typename PrimeGenerator<T>::iterator PrimeGenerator<T>::begin() {
@@ -19,17 +19,19 @@ void PrimeGenerator<T>::generate_more() {
 	bool no_prime_found = true;
 
 	while (no_prime_found) {
-		last_checked_number += 6;
-
-		if (is_prime(last_checked_number)) {
-			found_primes.push_back(last_checked_number);
+		if (is_prime(number_to_check)) {
+			found_primes.push_back(number_to_check);
 			no_prime_found = false;
 		}
 
-		if (is_prime(last_checked_number + 2)) {
-			found_primes.push_back(last_checked_number + 2);
+		number_to_check += 2;
+
+		if (is_prime(number_to_check)) {
+			found_primes.push_back(number_to_check);
 			no_prime_found = false;
 		}
+
+		number_to_check += 4;
 	}
 }
 

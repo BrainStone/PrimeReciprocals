@@ -10,7 +10,7 @@ template <std::unsigned_integral T>
 class PrimeGenerator {
 private:
 	std::list<T> found_primes;
-	T last_checked_number;
+	T number_to_check;
 
 public:
 	using iterator = PrimeIterator<T>;
