@@ -9,6 +9,8 @@
 void print_prime_factors(std::uint64_t num) {
 	bool print_star = false;
 
+	std::cout << num << " = ";
+
 	for (const auto& factor : prime_factors(num)) {
 		if (print_star)
 			std::cout << " * ";
