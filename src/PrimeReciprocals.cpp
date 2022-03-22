@@ -6,6 +6,21 @@
 #include "PrimeIterator.hpp"
 #include "math.hpp"
 
+void print_prime_factors(std::uint64_t num) {
+	bool print_star = false;
+
+	for (const auto& factor : prime_factors(num)) {
+		if (print_star)
+			std::cout << " * ";
+		else
+			print_star = true;
+
+		std::cout << factor.first << "^" << factor.second;
+	}
+
+	std::cout << std::endl;
+}
+
 int main() {
 	constexpr auto res = pow_mod(10U, 34U, 103U);
 	constexpr auto res2 =
@@ -25,4 +40,12 @@ int main() {
 	}
 
 	std::cout.flush();
+
+	print_prime_factors(73014444032);
+	print_prime_factors(4294967296);
+	print_prime_factors(std::numeric_limits<std::uint32_t>::max() - 3);
+	print_prime_factors(std::numeric_limits<std::uint32_t>::max() - 4);
+	print_prime_factors(std::numeric_limits<std::uint64_t>::max() - 3);
+	print_prime_factors(std::numeric_limits<std::uint64_t>::max() - 4);
+	print_prime_factors(4449874897498964);
 }

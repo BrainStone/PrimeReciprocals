@@ -3,6 +3,8 @@
 
 #include "math.hpp"
 
+#include "PrimeIterator.hpp"
+
 template <std::unsigned_integral T>
 constexpr T add_mod(T sum1, T sum2, T mod) {
 	sum1 %= mod;
@@ -92,6 +94,31 @@ constexpr T pow_mod_unsafe(T base, T exp, T mod) {
 	}
 
 	return result;
+}
+
+template <std::unsigned_integral T>
+std::map<T, std::size_t> prime_factors(T num) {
+	static PrimeGenerator<T> generator{};
+
+	std::map<T, size_t> output;
+
+	for (typename PrimeGenerator<T>::iterator it = generator.begin(); *it <= sqrt(num); ++it) {
+		if ((num % *it) == 0) {
+			num /= *it;
+
+			output.emplace(*it, 1);
+
+			while ((num % *it) == 0) {
+				num /= *it;
+
+				++output[*it];
+			}
+		}
+	}
+
+	if (num != 1) output.emplace(num, 1);
+
+	return output;
 }
 
 #endif
