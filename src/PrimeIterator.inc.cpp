@@ -10,7 +10,7 @@ template <std::unsigned_integral T>
 PrimeGenerator<T>::PrimeGenerator() : found_primes({2, 3}), number_to_check(5) {}
 
 template <std::unsigned_integral T>
-typename PrimeGenerator<T>::iterator PrimeGenerator<T>::begin() {
+typename PrimeGenerator<T>::iterator_type PrimeGenerator<T>::begin() {
 	return PrimeIterator<T>(this);
 }
 
@@ -39,7 +39,7 @@ template <std::unsigned_integral T>
 bool PrimeGenerator<T>::is_prime(T num) {
 	const T limit = static_cast<T>(std::sqrt(num));
 
-	for (typename std::list<T>::const_iterator it = found_primes.cbegin(); *it <= limit; ++it) {
+	for (typename container_type::const_iterator it = found_primes.cbegin(); *it <= limit; ++it) {
 		if ((num % *it) == 0) return false;
 	}
 
@@ -63,13 +63,15 @@ T PrimeIterator<T>::operator*() const {
 
 template <std::unsigned_integral T>
 PrimeIterator<T>& PrimeIterator<T>::operator++() {
-	++current_prime;
+	if ((current_prime + 1) == generator->found_primes.cend()) {
+		const internal_iterator_type::difference_type offset = current_prime - generator->found_primes.cbegin();
 
-	if (current_prime == generator->found_primes.cend()) {
-		--current_prime;
 		generator->generate_more();
-		++current_prime;
+
+		current_prime = generator->found_primes.cbegin() + offset;
 	}
+
+	++current_prime;
 
 	return *this;
 }
