@@ -1,6 +1,10 @@
 #include "PrimeReciprocals.hpp"
 
+#include <iostream>
 #include <limits>
+
+#include "PrimeIterator.hpp"
+#include "math.hpp"
 
 int main() {
 	constexpr auto res = pow_mod(10U, 34U, 103U);
@@ -12,4 +16,11 @@ int main() {
 	            std::numeric_limits<std::uint32_t>::max() - 2);
 
 	std::cout << "10 ^ 34 mod 103 = " << res << std::endl;
+
+	PrimeGenerator<std::uint64_t> gen;
+	std::bidirectional_iterator auto test = gen.begin();
+
+	for (PrimeGenerator<std::uint64_t>::iterator it = gen.begin(); ; ++it) {
+		std::cout << *it << '\n';
+	}
 }
