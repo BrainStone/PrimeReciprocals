@@ -7,6 +7,9 @@ int main() {
 	constexpr auto res2 =
 	    pow_mod(std::numeric_limits<std::uint32_t>::max() - 3, std::numeric_limits<std::uint32_t>::max() - 4,
 	            std::numeric_limits<std::uint32_t>::max() - 2);
+	constexpr auto res3 =
+	    mul_mod(std::numeric_limits<std::uint32_t>::max() - 3, std::numeric_limits<std::uint32_t>::max() - 4,
+	            std::numeric_limits<std::uint32_t>::max() - 2);
 
 	std::cout << "10 ^ 34 mod 103 = " << res << std::endl;
 }
