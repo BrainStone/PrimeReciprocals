@@ -37,10 +37,8 @@ private:
 template <std::unsigned_integral T>
 class PrimeIterator {
 private:
-	using internal_iterator_type = typename PrimeGenerator<T>::container_type::size_type;
-
 	PrimeGenerator<T>* generator;
-	typename internal_iterator_type current_prime;
+	typename PrimeGenerator<T>::container_type::size_type current_prime_index;
 
 	PrimeIterator(PrimeGenerator<T>* generator);
 

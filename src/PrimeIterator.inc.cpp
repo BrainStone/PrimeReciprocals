@@ -49,25 +49,25 @@ bool PrimeGenerator<T>::is_prime(T num) {
 // PrimeIterator
 template <std::unsigned_integral T>
 PrimeIterator<T>::PrimeIterator(PrimeGenerator<T>* generator)
-    : generator(generator), current_prime(0) {}
+    : generator(generator), current_prime_index(0) {}
 
 template <std::unsigned_integral T>
 bool PrimeIterator<T>::operator==(const PrimeIterator<T>& other) const {
-	return (&this->generator == &other.generator) && (this->current_prime == other.current_prime);
+	return (&this->generator == &other.generator) && (this->current_prime_index == other.current_prime_index);
 }
 
 template <std::unsigned_integral T>
 T PrimeIterator<T>::operator*() const {
-	return generator->found_primes[current_prime];
+	return generator->found_primes[current_prime_index];
 }
 
 template <std::unsigned_integral T>
 PrimeIterator<T>& PrimeIterator<T>::operator++() {
-	if ((current_prime + 1) >= generator->found_primes.size()) {
+	if ((current_prime_index + 1) >= generator->found_primes.size()) {
 		generator->generate_more();
 	}
 
-	++current_prime;
+	++current_prime_index;
 
 	return *this;
 }
@@ -81,7 +81,7 @@ PrimeIterator<T> PrimeIterator<T>::operator++(int) {
 
 template <std::unsigned_integral T>
 PrimeIterator<T>& PrimeIterator<T>::operator--() {
-	--current_prime;
+	--current_prime_index;
 
 	return *this;
 }
