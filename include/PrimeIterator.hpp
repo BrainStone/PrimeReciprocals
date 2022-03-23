@@ -37,7 +37,7 @@ private:
 template <std::unsigned_integral T>
 class PrimeIterator {
 private:
-	using internal_iterator_type = typename PrimeGenerator<T>::container_type::const_iterator;
+	using internal_iterator_type = typename PrimeGenerator<T>::container_type::size_type;
 
 	PrimeGenerator<T>* generator;
 	typename internal_iterator_type current_prime;
@@ -45,7 +45,7 @@ private:
 	PrimeIterator(PrimeGenerator<T>* generator);
 
 public:
-	using difference_type = typename internal_iterator_type::difference_type;
+	using difference_type = typename PrimeGenerator<T>::container_type::difference_type;
 	using value_type = T;
 
 	PrimeIterator() = default;
