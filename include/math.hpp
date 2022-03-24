@@ -18,6 +18,9 @@ constexpr T pow_mod(T base, T exp, T mod);
 template <std::unsigned_integral T>
 constexpr T pow_mod_unsafe(T base, T exp, T mod);
 
+template <std::integral T, std::unsigned_integral U>
+constexpr T pown(T base, U exp);
+
 template <std::unsigned_integral T>
 bool is_prime(T num);
 

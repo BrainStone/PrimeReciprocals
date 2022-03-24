@@ -82,15 +82,30 @@ constexpr T pow_mod(T base, T exp, T mod) {
 template <std::unsigned_integral T>
 constexpr T pow_mod_unsafe(T base, T exp, T mod) {
 	T result = 1;
-	T tmp_base = base;
 
 	while (exp > 0) {
 		if ((exp & 1) == 1) {
-			result = mul_mod_unsafe<T>(result, tmp_base, mod);
+			result = mul_mod_unsafe<T>(result, base, mod);
 		}
 
 		exp >>= 1;
-		tmp_base = mul_mod_unsafe<T>(tmp_base, tmp_base, mod);
+		tmp_base = mul_mod_unsafe<T>(base, base, mod);
+	}
+
+	return result;
+}
+
+template <std::integral T, std::unsigned_integral U>
+constexpr T pown(T base, U exp) {
+	T result = 1;
+
+	while (exp > 0) {
+		if ((exp & 1) == 1) {
+			result *= base;
+		}
+		
+		exp >>= 1;
+		base *= base;
 	}
 
 	return result;
