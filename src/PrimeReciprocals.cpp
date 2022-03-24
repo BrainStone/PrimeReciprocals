@@ -23,6 +23,23 @@ void print_prime_factors(std::uint64_t num) {
 	std::cout << std::endl;
 }
 
+void print_divisors(std::uint64_t num) {
+	bool print_comma = false;
+
+	std::cout << "Factors of " << num << ": ";
+
+	for (const auto& factor : all_divisors(num)) {
+		if (print_comma)
+			std::cout << ", ";
+		else
+			print_comma = true;
+
+		std::cout << factor;
+	}
+
+	std::cout << std::endl;
+}
+
 int main() {
 	constexpr auto res = pow_mod(10U, 34U, 103U);
 	constexpr auto res2 =
@@ -58,4 +75,9 @@ int main() {
 	// print_prime_factors(std::numeric_limits<std::uint64_t>::max() - 3); // Takes around 10 minutes
 	print_prime_factors(std::numeric_limits<std::uint64_t>::max() - 4);
 	print_prime_factors(4449874897498964);
+
+	print_divisors(73014444032);
+	print_divisors(std::numeric_limits<std::uint32_t>::max() - 3);
+	print_divisors(std::numeric_limits<std::uint64_t>::max() - 4);
+	print_divisors(28423334474128739);
 }

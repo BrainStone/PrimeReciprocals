@@ -2,6 +2,7 @@
 
 #include <concepts>
 #include <map>
+#include <set>
 
 template <std::unsigned_integral T>
 constexpr T add_mod(T sum1, T sum2, T mod);
@@ -26,6 +27,9 @@ bool is_prime(T num);
 
 template <std::unsigned_integral T>
 std::map<T, std::size_t> prime_factors(T num);
+
+template <std::unsigned_integral T>
+std::set<T> all_divisors(T num);
 
 // Actual definitions here!
 #include "math.inc.cpp"

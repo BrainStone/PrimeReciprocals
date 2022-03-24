@@ -148,4 +148,32 @@ std::map<T, std::size_t> prime_factors(T num) {
 	return output;
 }
 
+template <std::unsigned_integral T>
+std::set<T> all_divisors(T num) {
+	std::map<T, size_t> pfactors = prime_factors<T>(num);
+	std::set<T> output;
+
+	size_t count = 0;
+	size_t temp_count;
+	T prod;
+
+	do {
+		temp_count = count;
+		prod = 1;
+
+		for (const std::map<T, size_t>::value_type& factor : pfactors) {
+			if (temp_count == 0) break;
+
+			prod *= pown<T, T>(factor.first, temp_count % (factor.second + 1));
+			temp_count /= (factor.second + 1);
+		}
+
+		output.insert(prod);
+
+		++count;
+	} while (temp_count == 0);
+
+	return output;
+}
+
 #endif
