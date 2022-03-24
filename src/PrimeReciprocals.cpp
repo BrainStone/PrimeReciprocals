@@ -54,7 +54,7 @@ int main() {
 	PrimeGenerator<std::uint64_t> gen;
 	std::bidirectional_iterator auto test = gen.begin();
 
-	for (typename PrimeGenerator<std::uint64_t>::iterator it = gen.begin(); *it < 1000; ++it) {
+	for (typename PrimeGenerator<std::uint64_t>::iterator_type it = gen.begin(); *it < 1000; ++it) {
 		std::cout << *it << '\n';
 	}
 

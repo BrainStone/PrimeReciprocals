@@ -1,7 +1,7 @@
 #pragma once
 
 #include <concepts>
-#include <list>
+#include <vector>
 
 template <std::unsigned_integral T>
 class PrimeIterator;
@@ -9,11 +9,13 @@ class PrimeIterator;
 template <std::unsigned_integral T>
 class PrimeGenerator {
 private:
-	std::list<T> found_primes;
+	using container_type = std::vector<T>;
+
+	typename container_type found_primes;
 	T number_to_check;
 
 public:
-	using iterator = PrimeIterator<T>;
+	using iterator_type = PrimeIterator<T>;
 
 	PrimeGenerator();
 	PrimeGenerator(const PrimeGenerator<T>& other) = default;
@@ -23,7 +25,7 @@ public:
 	PrimeGenerator<T>& operator=(const PrimeGenerator<T>& other) = default;
 	PrimeGenerator<T>& operator=(PrimeGenerator<T>&& other) = default;
 
-	iterator begin();
+	iterator_type begin();
 
 private:
 	void generate_more();
@@ -36,12 +38,12 @@ template <std::unsigned_integral T>
 class PrimeIterator {
 private:
 	PrimeGenerator<T>* generator;
-	typename std::list<T>::const_iterator current_prime;
+	typename PrimeGenerator<T>::container_type::size_type current_prime_index;
 
 	PrimeIterator(PrimeGenerator<T>* generator);
 
 public:
-	using difference_type = typename std::list<T>::const_iterator::difference_type;
+	using difference_type = typename PrimeGenerator<T>::container_type::difference_type;
 	using value_type = T;
 
 	PrimeIterator() = default;

@@ -129,7 +129,7 @@ template <std::unsigned_integral T>
 std::map<T, std::size_t> prime_factors(T num) {
 	std::map<T, size_t> output;
 
-	for (typename PrimeGenerator<T>::iterator it = generator<T>.begin(); *it <= sqrt(num); ++it) {
+	for (typename PrimeGenerator<T>::iterator_type it = generator.begin(); *it <= sqrt(num); ++it) {
 		if ((num % *it) == 0) {
 			num /= *it;
 
