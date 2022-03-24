@@ -89,7 +89,7 @@ constexpr T pow_mod_unsafe(T base, T exp, T mod) {
 		}
 
 		exp >>= 1;
-		tmp_base = mul_mod_unsafe<T>(base, base, mod);
+		base = mul_mod_unsafe<T>(base, base, mod);
 	}
 
 	return result;
@@ -103,7 +103,7 @@ constexpr T pown(T base, U exp) {
 		if ((exp & 1) == 1) {
 			result *= base;
 		}
-		
+
 		exp >>= 1;
 		base *= base;
 	}
