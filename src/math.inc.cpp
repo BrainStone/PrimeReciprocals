@@ -97,12 +97,24 @@ constexpr T pow_mod_unsafe(T base, T exp, T mod) {
 }
 
 template <std::unsigned_integral T>
-std::map<T, std::size_t> prime_factors(T num) {
-	static PrimeGenerator<T> generator{};
+static PrimeGenerator<T> generator{};
 
+template <std::unsigned_integral T>
+bool is_prime(T num) {
+	const T limit = static_cast<T>(std::sqrt(num));
+
+	for (typename PrimeGenerator<T>::iterator it = generator<T>.begin(); *it <= limit; ++it) {
+		if ((num % *it) == 0) return false;
+	}
+
+	return true;
+}
+
+template <std::unsigned_integral T>
+std::map<T, std::size_t> prime_factors(T num) {
 	std::map<T, size_t> output;
 
-	for (typename PrimeGenerator<T>::iterator it = generator.begin(); *it <= sqrt(num); ++it) {
+	for (typename PrimeGenerator<T>::iterator it = generator<T>.begin(); *it <= sqrt(num); ++it) {
 		if ((num % *it) == 0) {
 			num /= *it;
 

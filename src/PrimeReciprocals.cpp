@@ -43,11 +43,19 @@ int main() {
 
 	std::cout.flush();
 
+	std::cout << "4294967291 is prime? " << (is_prime<std::uint64_t>(4294967291) ? "true" : "false") << std::endl;
+	std::cout << "1112468724374741 is prime? " << (is_prime<std::uint64_t>(1112468724374741) ? "true" : "false")
+	          << std::endl;
+	std::cout << "1112468724374743 is prime? " << (is_prime<std::uint64_t>(1112468724374743) ? "true" : "false")
+	          << std::endl;
+	std::cout << "28423334474128739 is prime? " << (is_prime<std::uint64_t>(28423334474128739) ? "true" : "false")
+	          << std::endl;
+
 	print_prime_factors(73014444032);
 	print_prime_factors(4294967296);
 	print_prime_factors(std::numeric_limits<std::uint32_t>::max() - 3);
 	print_prime_factors(std::numeric_limits<std::uint32_t>::max() - 4);
-	print_prime_factors(std::numeric_limits<std::uint64_t>::max() - 3);
+	// print_prime_factors(std::numeric_limits<std::uint64_t>::max() - 3); // Takes around 10 minutes
 	print_prime_factors(std::numeric_limits<std::uint64_t>::max() - 4);
 	print_prime_factors(4449874897498964);
 }
