@@ -31,5 +31,8 @@ std::map<T, std::size_t> prime_factors(T num);
 template <std::unsigned_integral T>
 std::set<T> all_divisors(T num);
 
+template <std::unsigned_integral T>
+T count_period(T prime);
+
 // Actual definitions here!
 #include "math.inc.cpp"

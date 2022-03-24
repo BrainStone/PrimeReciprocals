@@ -176,4 +176,16 @@ std::set<T> all_divisors(T num) {
 	return output;
 }
 
+template <std::unsigned_integral T>
+T count_period(T prime) {
+	const T base = 10 % prime;
+
+	for (T divisor : all_divisors<T>(prime - 1)) {
+		if (pow_mod_unsafe<T>(base, divisor, prime) == 1) return divisor;
+	}
+
+	// Can't happen!
+	return 0;
+}
+
 #endif
