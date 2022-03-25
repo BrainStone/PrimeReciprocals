@@ -131,31 +131,31 @@ bool is_prime(T num) {
 
 template <std::unsigned_integral T>
 std::map<T, std::size_t> prime_factors(T num) {
-	std::map<T, size_t> output;
+	std::map<T, size_t> result;
 
 	for (typename PrimeGenerator<T>::iterator_type it = generator<T>.begin(); *it <= sqrt(num); ++it) {
 		if ((num % *it) == 0) {
 			num /= *it;
 
-			output.emplace(*it, 1);
+			result.emplace(*it, 1);
 
 			while ((num % *it) == 0) {
 				num /= *it;
 
-				++output[*it];
+				++result[*it];
 			}
 		}
 	}
 
-	if (num != 1) output.emplace(num, 1);
+	if (num != 1) result.emplace(num, 1);
 
-	return output;
+	return result;
 }
 
 template <std::unsigned_integral T>
 std::set<T> all_divisors(T num) {
 	std::map<T, size_t> pfactors = prime_factors<T>(num);
-	std::set<T> output;
+	std::set<T> result;
 
 	size_t count = 0;
 	size_t temp_count;
@@ -172,12 +172,23 @@ std::set<T> all_divisors(T num) {
 			temp_count /= (factor.second + 1);
 		}
 
-		output.insert(prod);
+		result.insert(prod);
 
 		++count;
 	} while (temp_count == 0);
 
-	return output;
+	return result;
+}
+
+template <std::unsigned_integral T>
+T totient(T num) {
+	T result = 1;
+
+	for (const std::map<T, size_t>::value_type& factor : prime_factors<T>(num)) {
+		result *= pown<T, T>(factor.first, factor.second - 1) * (factor.first - 1);
+	}
+
+	return result;
 }
 
 template <std::unsigned_integral T>
@@ -185,13 +196,12 @@ T count_period(T num) {
 	const T base = 10 % num;
 	T res;
 
-	for (T divisor : all_divisors<T>(num - 1)) {
+	// TODO: num needs to be made coprime to 10
+
+	for (T divisor : all_divisors<T>(totient<T>(num))) {
 		res = pow_mod_unsafe<T>(base, divisor, num);
 
-		if (res == 0)
-			return 0;  // Number is divisible
-		else if (res == 1)
-			return divisor;
+		if (res == 1) return divisor;
 	}
 
 	// Can't happen!

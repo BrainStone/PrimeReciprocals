@@ -32,6 +32,9 @@ template <std::unsigned_integral T>
 std::set<T> all_divisors(T num);
 
 template <std::unsigned_integral T>
+T totient(T num);
+
+template <std::unsigned_integral T>
 T count_period(T num);
 
 // Actual definitions here!
