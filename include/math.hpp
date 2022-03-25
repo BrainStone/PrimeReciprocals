@@ -32,6 +32,9 @@ template <std::unsigned_integral T>
 std::set<T> all_divisors(T num);
 
 template <std::unsigned_integral T>
+T make_coprime(T num, T other_num);
+
+template <std::unsigned_integral T>
 T totient(T num);
 
 template <std::unsigned_integral T>

@@ -181,6 +181,23 @@ std::set<T> all_divisors(T num) {
 }
 
 template <std::unsigned_integral T>
+T make_coprime(T num, T other_num) {
+	std::map<T, size_t> pfactors = prime_factors<T>(num);
+
+	for (const std::map<T, size_t>::value_type& factor : prime_factors<T>(other_num)) {
+		pfactors.erase(factor.first);
+	}
+
+	T result = 1;
+
+	for (const std::map<T, size_t>::value_type& factor : pfactors) {
+		result *= pown<T, T>(factor.first, factor.second);
+	}
+
+	return result;
+}
+
+template <std::unsigned_integral T>
 T totient(T num) {
 	T result = 1;
 
@@ -193,10 +210,13 @@ T totient(T num) {
 
 template <std::unsigned_integral T>
 T count_period(T num) {
+	num = make_coprime<T>(num, 10);
+
+	// 10 is divisible by original num
+	if (num == 1) return 0;
+
 	const T base = 10 % num;
 	T res;
-
-	// TODO: num needs to be made coprime to 10
 
 	for (T divisor : all_divisors<T>(totient<T>(num))) {
 		res = pow_mod_unsafe<T>(base, divisor, num);

@@ -1,4 +1,4 @@
-#include "PrimeReciprocals.hpp"
+#include "IntegerReciprocals.hpp"
 
 #include <chrono>
 #include <iomanip>
