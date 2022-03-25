@@ -32,7 +32,7 @@ template <std::unsigned_integral T>
 std::set<T> all_divisors(T num);
 
 template <std::unsigned_integral T>
-T count_period(T prime);
+T count_period(T num);
 
 // Actual definitions here!
 #include "math.inc.cpp"

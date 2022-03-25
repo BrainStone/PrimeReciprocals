@@ -34,6 +34,8 @@ constexpr T mul_mod(T fac1, T fac2, T mod) {
 // Based on this StackOverflow answer: https://stackoverflow.com/a/20972369/1996022
 template <std::unsigned_integral T>
 constexpr T mul_mod_unsafe(T fac1, T fac2, T mod) {
+	if ((fac1 == 0) || (fac2 == 0)) return 0;
+
 	const T quotient = mod / fac1;
 	const T ratio = mod % fac1;
 
@@ -84,6 +86,8 @@ constexpr T pow_mod_unsafe(T base, T exp, T mod) {
 	T result = 1;
 
 	while (exp > 0) {
+		if (base == 0) return 0;
+
 		if ((exp & 1) == 1) {
 			result = mul_mod_unsafe<T>(result, base, mod);
 		}
@@ -177,11 +181,17 @@ std::set<T> all_divisors(T num) {
 }
 
 template <std::unsigned_integral T>
-T count_period(T prime) {
-	const T base = 10 % prime;
+T count_period(T num) {
+	const T base = 10 % num;
+	T res;
 
-	for (T divisor : all_divisors<T>(prime - 1)) {
-		if (pow_mod_unsafe<T>(base, divisor, prime) == 1) return divisor;
+	for (T divisor : all_divisors<T>(num - 1)) {
+		res = pow_mod_unsafe<T>(base, divisor, num);
+
+		if (res == 0)
+			return 0;  // Number is divisible
+		else if (res == 1)
+			return divisor;
 	}
 
 	// Can't happen!
